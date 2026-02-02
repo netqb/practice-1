@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Опросник</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Практика full-stack</p>
+        <h1>Опросник</h1>
+        <p class="subtitle">
+          Создавайте анкеты, собирайте ответы и смотрите простую статистику.
+        </p>
+      </div>
+      <nav class="hero__actions">
+        <button class="btn" data-view="list">Все анкеты</button>
+        <button class="btn btn--primary" data-view="create">Создать анкету</button>
+        <button class="btn" data-view="stats">Статистика</button>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section id="view-list" class="view">
+        <div class="view__header">
+          <h2>Доступные анкеты</h2>
+          <p>Выберите анкету, чтобы пройти опрос.</p>
+        </div>
+        <div id="survey-list" class="grid"></div>
+      </section>
+
+      <section id="view-create" class="view is-hidden">
+        <div class="view__header">
+          <h2>Новая анкета</h2>
+          <p>Добавьте вопросы и варианты ответа.</p>
+        </div>
+        <form id="create-form" class="card form">
+          <label>
+            Название анкеты
+            <input type="text" name="title" required placeholder="Например, Оценка сервиса" />
+          </label>
+          <label>
+            Описание
+            <textarea name="description" rows="3" placeholder="Коротко расскажите о цели опроса"></textarea>
+          </label>
+
+          <div class="form__section">
+            <div class="form__section-header">
+              <h3>Вопросы</h3>
+              <button type="button" class="btn" id="add-question">+ Добавить вопрос</button>
+            </div>
+            <div id="questions"></div>
+          </div>
+
+          <button type="submit" class="btn btn--primary">Создать анкету</button>
+        </form>
+      </section>
+
+      <section id="view-take" class="view is-hidden">
+        <div class="view__header">
+          <h2 id="take-title"></h2>
+          <p id="take-description"></p>
+        </div>
+        <form id="take-form" class="card form"></form>
+      </section>
+
+      <section id="view-stats" class="view is-hidden">
+        <div class="view__header">
+          <h2>Статистика</h2>
+          <p>Сводка по ответам на анкеты.</p>
+        </div>
+        <div id="stats-content" class="stack"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Опросник • Express + JSON-база</p>
+    </footer>
+
+    <template id="question-template">
+      <div class="question card">
+        <label>
+          Текст вопроса
+          <input type="text" name="question-text" required />
+        </label>
+        <label>
+          Тип
+          <select name="question-type">
+            <option value="single">Один вариант</option>
+            <option value="text">Свободный ответ</option>
+          </select>
+        </label>
+        <label class="options">
+          Варианты (через запятую)
+          <input type="text" name="question-options" placeholder="Да, Нет, Не уверен" />
+        </label>
+        <button type="button" class="btn btn--ghost remove-question">Удалить вопрос</button>
+      </div>
+    </template>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
